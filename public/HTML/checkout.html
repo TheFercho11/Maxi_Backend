@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Maxi Despensa</title>
+    <link rel="icon" type="image/png" href="/IMG/logo.png">
+    <link rel="stylesheet" href="/CSS/Estilos.css">
+    <link rel="stylesheet" href="/CSS/checkout.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <header class="barra-principal">
+        <div class="seccion-izquierda">
+            <a href="/HTML/index.html" class="logo-link">
+                <img src="/IMG/logo.png" alt="Maxi Despensa" class="logo">
+                <span class="nombre-empresa">Maxi Despensa
+                    <span class="eslogan">Proceso de Pago Seguro</span>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div id="auth-check"></div>
+
+        <div class="checkout-grid" style="display: none;">
+            <div class="checkout-form">
+                <div class="section-header">
+                    <h2>1. Detalles de Envío</h2>
+                    <button id="edit-shipping-btn" class="btn btn-secondary">✏️ Editar</button>
+                </div>
+
+                <div id="shipping-details">
+                    </div>
+                 <div class="form-actions hidden" id="shipping-actions">
+                    <button type="button" id="save-shipping-btn" class="btn btn-success">Guardar</button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancelar</button>
+                </div>
+
+
+                <h2>2. Método de Pago</h2>
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="stripe" checked>
+                        <span>Tarjeta de Crédito o Débito</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment-method" value="cod">
+                        <span>Pagar al recibir el pedido</span>
+                    </label>
+                </div>
+
+                <form id="payment-form">
+                    <div id="payment-element">
+                        </div>
+                    <button id="submit-btn" class="btn-checkout">
+                        <span id="button-text">Pagar ahora</span>
+                    </button>
+                    <div id="payment-message" class="hidden"></div>
+                </form>
+            </div>
+
+            <div class="order-summary">
+                <h2>Resumen de tu Pedido</h2>
+                <div id="cart-summary"></div>
+                <div class="summary-total">
+                    <span>Total a Pagar:</span>
+                    <span id="total-amount">$0.00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/JS/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Login Administrador - Maxi Despensa</title>
+    <link rel="icon" type="image/png" href="/IMG/logo.png">
+    <link rel="stylesheet" href="/CSS/Login Administrador.css">
+</head>
+<body>
+    <a href="index.html" class="back-home">← Volver al Inicio</a>
+    
+    <div class="login-container">
+        <div class="logo">
+            <img src="/IMG/logo.png" alt="Maxi Despensa Logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iNDAiIGZpbGw9IiM2NjdlZWEiLz4KPHN2ZyB4PSIyMCIgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Im0yMCAyLTggOGgtNGwtOC04aDQtMiA0LTQtMTAiLz4KPHN2Zz4K'">
+            <h2>Maxi Despensa</h2>
+            <p>Panel de Administración</p>
+        </div>
+        
+        <div id="alert" class="alert"></div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required autocomplete="username" placeholder="admin@maxidespensa.com">
+            </div>
+            
+            <div class="form-group" style="position: relative;">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Ingresa tu contraseña">
+                <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+            </div>
+            
+            <button type="submit" class="login-btn" id="login-btn">
+                <span id="btn-text">Iniciar Sesión</span>
+            </button>
+        </form>
+        
+        <div class="forgot-password">
+            <a href="#" onclick="showForgotPassword()">¿Olvidaste tu contraseña?</a>
+        </div>
+        
+        <div class="admin-features">
+            <h3>Funciones de Administrador</h3>
+            <ul class="feature-list">
+                <li>Gestión completa de productos</li>
+                <li>Control de inventario y stock</li>
+                <li>Administración de órdenes</li>
+                <li>Panel de estadísticas</li>
+                <li>Gestión de usuarios</li>
+            </ul>
+        </div>
+    </div>
+    <script src="/JS/Login Administrador.js"></script>
+</body>
+</html>

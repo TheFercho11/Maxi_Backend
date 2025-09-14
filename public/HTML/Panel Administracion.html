@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Maxi Despensa</title>
+    <link rel="icon" type="image/png" href="/IMG/logo.png">
+    <link rel="stylesheet" href="/CSS/Panel Administracion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>🏪 Maxi Despensa</h2>
+        <ul id="menu-navegacion">
+            <li><a href="#dashboard" class="nav-link active" data-seccion="dashboard">📊 Dashboard</a></li>
+            <li><a href="#productos" class="nav-link" data-seccion="productos">📦 Productos</a></li>
+            <li><a href="#ordenes" class="nav-link" data-seccion="ordenes">🛒 Órdenes</a></li>
+            <li><a href="#usuarios" class="nav-link" data-seccion="usuarios">👥 Usuarios</a></li>
+            <li><a href="#stock" class="nav-link" data-seccion="stock">📋 Stock</a></li>
+            <li><a href="#reportes" class="nav-link" data-seccion="reportes">📈 Reportes</a></li>
+            <li><a href="/HTML/Login Administrador.html" id="logout-btn">🚪 Cerrar Sesión</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Panel de Administración</h1>
+            <div>
+                <span id="admin-name">Cargando...</span>
+                <button class="btn" onclick="toggleSidebar()">☰</button>
+            </div>
+        </div>
+
+        <div id="dashboard" class="content-section active">
+            <h2>Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="total-usuarios">0</h3>
+                    <p>Clientes Registrados</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="total-productos">0</h3>
+                    <p>Productos Activos</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="ordenes-pendientes">0</h3>
+                    <p>Órdenes Pendientes</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="ventas-mes">$0.00</h3>
+                    <p>Ventas del Mes</p>
+                </div>
+            </div>
+            <div class="recent-activity">
+                <h3>Últimas 5 Órdenes</h3>
+                <table class="table" id="ultimas-ordenes-table">
+                    <thead>
+                        <tr>
+                            <th>N° Orden</th>
+                            <th>Cliente</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="productos" class="content-section">
+             <div class="section-header">
+                <h2>Gestión de Productos</h2>
+                <button class="btn btn-success" onclick="openProductModal()">➕ Nuevo Producto</button>
+            </div>
+            <div class="filters">
+                <input type="text" id="search-products" placeholder="Buscar por nombre o SKU...">
+                <select id="filter-category-products"></select>
+            </div>
+            <table class="table" id="productos-table">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+      <div id="ordenes" class="content-section">
+            <div class="section-header">
+                <h2>Gestión de Órdenes</h2>
+            </div>
+            <div class="filters">
+                <input type="text" id="search-orders-cliente" placeholder="Buscar por nombre de cliente...">
+                <label>Desde:</label>
+                <input type="date" id="order-start-date">
+                <label>Hasta:</label>
+                <input type="date" id="order-end-date">
+                <button class="btn" id="filter-orders-btn">Buscar</button>
+            </div>
+            <table class="table" id="ordenes-table">
+                <thead>
+                    <tr>
+                        <th>N° Orden</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        
+        <div id="usuarios" class="content-section">
+            <h2>Gestión de Usuarios</h2>
+            <div class="tabs">
+                <button class="tab-link active" data-tab="clientes">Clientes</button>
+                <button class="tab-link" data-tab="admins">Administradores</button>
+            </div>
+            <div id="clientes" class="tab-content active">
+                <table class="table" id="clientes-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="admins" class="tab-content">
+                 <button class="btn btn-success" style="margin-bottom: 20px;" onclick="openAdminCreateModal()">➕ Nuevo Administrador</button>
+                 <table class="table" id="admins-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="stock" class="content-section">
+            <div class="section-header">
+                <h2>Control de Stock</h2>
+                <button class="btn" id="export-stock-btn">Exportar a Excel</button>
+            </div>
+            <div class="filters">
+                <input type="text" id="search-stock-sku" placeholder="Buscar por SKU...">
+            </div>
+            <table class="table" id="stock-table">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Producto</th>
+                        <th>Stock Inicial</th>
+                        <th>Unidades Vendidas</th>
+                        <th>Stock Actual</th>
+                        <th>Stock Mínimo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>  
+
+        <div id="reportes" class="content-section">
+            <h2>Reportes</h2>
+            <div class="filters">
+                <label>Desde:</label>
+                <input type="date" id="report-start-date">
+                <label>Hasta:</label>
+                <input type="date" id="report-end-date">
+                <button class="btn" id="generate-report-btn">Generar Reporte</button>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <h3>Ventas por Categoría</h3>
+                    <canvas id="ventas-chart"></canvas>
+                </div>
+                <div>
+                    <h3>Clientes Nuevos por Día</h3>
+                    <canvas id="clientes-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProductModal()">&times;</span>
+            <h3 id="product-modal-title">Nuevo Producto</h3>
+            <form id="product-form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" id="product-name" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>SKU (Código único)</label>
+                        <input type="text" id="product-sku" name="sku">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select id="product-category" name="categoria_id" required></select>
+                    </div>
+                     <div class="form-group">
+                        <label>Descuento (%)</label>
+                        <input type="number" id="product-discount" name="descuento" value="0" min="0" max="100">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Precio ($)</label>
+                        <input type="number" step="0.01" id="product-price" name="precio" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio Anterior ($)</label>
+                        <input type="number" step="0.01" id="product-old-price" name="precio_anterior">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" id="product-stock" name="stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Mínimo</label>
+                        <input type="number" id="product-min-stock" name="stock_minimo" value="5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagen del Producto</label>
+                    <input type="file" id="product-image" name="imagen" accept="image/*">
+                    <img id="image-preview" src="" alt="Vista previa" style="max-width: 100px; margin-top: 10px; display: none;"/>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="product-active" name="activo" checked> Activo
+                    </label>
+                    <label>
+                        <input type="checkbox" id="product-featured" name="destacado"> Destacado
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Producto</button>
+                <input type="hidden" id="product-id">
+            </form>
+        </div>
+    </div>
+
+   <div id="order-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeOrderDetailsModal()">&times;</span>
+            <h3>Detalles de la Orden</h3>
+            <div id="order-details-content"></div>
+            
+            <div id="order-status-controls" style="margin-top: 20px;">
+                </div>
+
+            <button class="btn" id="print-order-btn">Imprimir Recibo</button>
+        </div>
+    </div>  
+
+    <div id="client-edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeClientModals()">&times;</span>
+            <h3>Editar Cliente</h3>
+            <form id="client-edit-form">
+                <input type="hidden" id="client-id" name="id">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="client-name" name="nombre" required>
+                </div>
+                 <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" id="client-apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="client-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" id="client-telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="client-activo" name="activo"> Cuenta Activa
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="client-purchases-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeClientModals()">&times;</span>
+            <h3>Historial de Compras</h3>
+            <div id="client-purchases-content">
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-create-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeClientModals()">&times;</span>
+            <h3>Nuevo Administrador</h3>
+            <form id="admin-create-form">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="admin-name" name="nombre" required>
+                </div>
+                 <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" id="admin-apellido" name="apellido">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="admin-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="admin-password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Rol</label>
+                    <select id="admin-rol" name="rol_id" required>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">Crear Administrador</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/JS/Panel Administracion.js"></script>
+</body>
+</html>
