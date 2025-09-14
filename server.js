@@ -117,10 +117,15 @@ app.get('/api/categorias', async (req, res) => {
 
 const getProductosPorCategoria = async (categoriaNombre, res) => {
     try {
+        // --- INICIO DE LA MODIFICACIÓN ---
+        // Cambiamos '=' por 'ILIKE' para una búsqueda insensible a mayúsculas/minúsculas.
         const { rows } = await pool.query(`
             SELECT p.id, p.nombre, p.sku, p.precio, p.precio_anterior, p.descuento, p.stock, p.imagen, p.destacado
-            FROM productos p JOIN categorias c ON p.categoria_id = c.id
-            WHERE c.nombre = $1 AND p.activo = TRUE`, [categoriaNombre]);
+            FROM productos p 
+            JOIN categorias c ON p.categoria_id = c.id
+            WHERE c.nombre ILIKE $1 AND p.activo = TRUE`, [categoriaNombre]);
+        // --- FIN DE LA MODIFICACIÓN ---
+            
         res.json(rows);
     } catch (error) {
         console.error(`Error en getProductosPorCategoria (${categoriaNombre}):`, error);
