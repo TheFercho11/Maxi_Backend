@@ -23,34 +23,33 @@ document.addEventListener('DOMContentLoaded', async function() {
             </div>
         `;
     }
+    });
 
     async function cargarProductos() {
-        const contenedor = document.getElementById('productos-container');
-        if (!contenedor) return;
-        
-        try {
-            const response = await fetch('/api/productos/electronica');
-            if (!response.ok) throw new Error('Error al cargar productos');
-            
-            const productos = await response.json();
-            
-            if (productos.length === 0) {
-                contenedor.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
-            } else {
-                contenedor.innerHTML = productos.map(crearTarjetaDeProducto).join('');
-            }
-        } catch (error) {
-            console.error('Error al cargar los productos:', error);
-            contenedor.innerHTML = '<p>Error al cargar los productos. Intente de nuevo más tarde.</p>';
+    const contenedor = document.getElementById('productos-container');
+    if (!contenedor) return;
+    
+    try {
+        const response = await fetch('/api/productos/electronica');
+        if (!response.ok) {
+            // Si la respuesta no es exitosa (ej. 404, 500), lanzamos un error
+            throw new Error('La respuesta del servidor no fue exitosa.');
         }
-         if (productos.length === 0) {
-                // ...
-            } else {
-                contenedor.innerHTML = productos.map(crearTarjetaDeProducto).join('');
-            }
-            // AÑADIR ESTA LÍNEA
-            document.dispatchEvent(new CustomEvent('productosCargados'));
-    }
+        
+        const productos = await response.json();
+        
+        if (productos.length === 0) {
+            contenedor.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';
+        } else {
+            contenedor.innerHTML = productos.map(crearTarjetaDeProducto).join('');
+        }
 
-    await cargarProductos();
-});
+        // --- CORRECCIÓN ---
+        // Despachamos el evento aquí, solo si todo salió bien.
+        document.dispatchEvent(new CustomEvent('productosCargados'));
+
+    } catch (error) {
+        console.error('Error al cargar los productos:', error);
+        contenedor.innerHTML = '<p>Hubo un problema al cargar los productos. Por favor, intente de nuevo más tarde.</p>';
+    }
+}
