@@ -10,14 +10,14 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-    <header class="barra-principal">
-        <div class="seccion-izquierda">
-            <a href="/HTML/index.html" class="logo-link">
-                <img src="/IMG/logo.png" alt="Maxi Despensa" class="logo">
-                <span class="nombre-empresa">Maxi Despensa
-                    <span class="eslogan">Proceso de Pago Seguro</span>
-                </span>
-            </a>
+    <header class="checkout-header">
+        <a href="/HTML/index.html" class="logo-link">
+            <img src="/IMG/logo.png" alt="Maxi Despensa" class="logo">
+            <span class="nombre-empresa">Maxi Despensa</span>
+        </a>
+        <div class="secure-checkout-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-3.5-3.5 1.41-1.41L11 14.17l5.59-5.59L18 10l-7 7z"></path></svg>
+            <span>Pago Seguro</span>
         </div>
     </header>
 
@@ -25,52 +25,70 @@
         <div id="auth-check"></div>
 
         <div class="checkout-grid" style="display: none;">
+            
             <div class="checkout-form">
-                <div class="section-header">
-                    <h2>1. Detalles de Envío</h2>
-                    <button id="edit-shipping-btn" class="btn btn-secondary">✏️ Editar</button>
-                </div>
-
-                <div id="shipping-details">
+                
+                <section class="checkout-section">
+                    <div class="section-header">
+                        <h2>1. Detalles de Envío</h2>
+                        <button id="edit-shipping-btn" class="btn btn-secondary">✏️ Editar</button>
                     </div>
-                 <div class="form-actions hidden" id="shipping-actions">
-                    <button type="button" id="save-shipping-btn" class="btn btn-success">Guardar</button>
-                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancelar</button>
-                </div>
-
-
-                <h2>2. Método de Pago</h2>
-                <div class="payment-methods">
-                    <label class="payment-option">
-                        <input type="radio" name="payment-method" value="stripe" checked>
-                        <span>Tarjeta de Crédito o Débito</span>
-                    </label>
-                    <label class="payment-option">
-                        <input type="radio" name="payment-method" value="cod">
-                        <span>Pagar al recibir el pedido</span>
-                    </label>
-                </div>
-
-                <form id="payment-form">
-                    <div id="payment-element">
+                    <div id="shipping-details">
                         </div>
-                    <button id="submit-btn" class="btn-checkout">
-                        <span id="button-text">Pagar ahora</span>
-                    </button>
-                    <div id="payment-message" class="hidden"></div>
-                </form>
+                    <div class="form-actions hidden" id="shipping-actions">
+                        <button type="button" id="save-shipping-btn" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Cancelar</button>
+                    </div>
+                </section>
+
+                <section class="checkout-section">
+                    <div class="section-header">
+                        <h2>2. Método de Pago</h2>
+                    </div>
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="stripe" checked>
+                            <span>Tarjeta de Crédito o Débito</span>
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="cod">
+                            <span>Pagar al recibir el pedido</span>
+                        </label>
+                    </div>
+                    <form id="payment-form">
+                        <div id="payment-element">
+                            </div>
+                        <button id="submit-btn" class="btn-checkout-main">
+                            <span id="button-text">Pagar ahora</span>
+                        </button>
+                        <div id="payment-message" class="hidden"></div>
+                    </form>
+                </section>
             </div>
 
-            <div class="order-summary">
-                <h2>Resumen de tu Pedido</h2>
-                <div id="cart-summary"></div>
-                <div class="summary-total">
-                    <span>Total a Pagar:</span>
-                    <span id="total-amount">$0.00</span>
+            <div class="order-summary-container">
+                <div class="order-summary">
+                    <details class="mobile-summary-toggle" open>
+                        <summary>
+                            <span>Mostrar resumen del pedido</span>
+                            <span id="mobile-total-amount" class="summary-total-price">$0.00</span>
+                        </summary>
+                        <div id="cart-summary-mobile" class="cart-summary-items">
+                            </div>
+                    </details>
+                    
+                    <h2 class="desktop-summary-title">Resumen de tu Pedido</h2>
+                    <div id="cart-summary" class="cart-summary-items">
+                        </div>
+                    <div class="summary-total">
+                        <span>Total a Pagar:</span>
+                        <span id="total-amount" class="summary-total-price">$0.00</span>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
     <script src="/JS/checkout.js"></script>
 </body>
 </html>

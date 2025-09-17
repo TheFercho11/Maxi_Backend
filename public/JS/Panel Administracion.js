@@ -76,17 +76,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- Navegación y Eventos Generales ---
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (this.parentElement.classList.contains('deshabilitada')) return;
-            if (this.id === 'logout-btn') { logout(); return; }
-            const sectionId = this.getAttribute('data-seccion');
-            showSection(sectionId);
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
+   // Reemplaza este bloque completo en Panel Administracion.js
+
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // La lógica que ya tenías
+        if (this.parentElement.classList.contains('deshabilitada')) return;
+        if (this.id === 'logout-btn') { logout(); return; }
+        const sectionId = this.getAttribute('data-seccion');
+        showSection(sectionId);
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+
+        // --- INICIO DEL CÓDIGO AÑADIDO ---
+        // Después de hacer clic, buscamos el panel lateral
+        const sidebar = document.querySelector('.sidebar');
+        // Comprobamos si el panel está activo (es decir, visible en el móvil)
+        if (sidebar.classList.contains('active')) {
+            // Si está activo, le quitamos la clase para que se oculte
+            sidebar.classList.remove('active');
+        }
+        // --- FIN DEL CÓDIGO AÑADIDO ---
     });
+});
 
     document.querySelectorAll('.tab-link').forEach(button => {
         button.addEventListener('click', () => {
@@ -186,27 +200,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
    function renderProducts(products) {
-        const tbody = document.querySelector('#productos-table tbody');
-        tbody.innerHTML = products.map(p => `
-            <tr>
-                <td>${p.sku || 'N/A'}</td>
-                <td><img src="${p.imagen || '/IMG/placeholder.png'}" alt="${p.nombre}" style="width: 50px; height: 50px; object-fit: cover;"></td>
-                <td>${p.nombre}</td>
-                <td>${p.categoria_nombre || 'Sin categoría'}</td>
-                <td>$${p.precio ? parseFloat(p.precio).toFixed(2) : '0.00'}</td>
-                <td>${p.stock}</td>
-                <td><span class="badge ${p.activo ? 'badge-success' : 'badge-danger'}">${p.activo ? 'Activo' : 'Inactivo'}</span></td>
-                <td>
-                    <button class="btn btn-sm btn-info" onclick="openProductModal(${p.id})">
-                        <i class="fas fa-edit"></i> Editar
-                    </button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})">
-                        <i class="fas fa-trash-alt"></i> Eliminar
-                    </button>
-                </td>
-            </tr>
-        `).join('');
-    }
+    const tbody = document.querySelector('#productos-table tbody');
+    tbody.innerHTML = products.map(p => `
+        <tr>
+            <td data-label="SKU">${p.sku || 'N/A'}</td>
+            <td data-label="Imagen"><img src="${p.imagen || '/IMG/placeholder.png'}" alt="${p.nombre}"></td>
+            <td data-label="Nombre">${p.nombre}</td>
+            <td data-label="Categoría">${p.categoria_nombre || 'Sin categoría'}</td>
+            <td data-label="Precio">$${p.precio ? parseFloat(p.precio).toFixed(2) : '0.00'}</td>
+            <td data-label="Stock">${p.stock}</td>
+            <td data-label="Estado"><span class="badge ${p.activo ? 'badge-success' : 'badge-danger'}">${p.activo ? 'Activo' : 'Inactivo'}</span></td>
+            <td data-label="Acciones">
+                <button class="btn btn-sm btn-info" onclick="openProductModal(${p.id})"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger" onclick="deleteProduct(${p.id})"><i class="fas fa-trash-alt"></i></button>
+            </td>
+        </tr>
+    `).join('');
+}
 
     async function handleProductSubmit(e) {
         e.preventDefault();
@@ -290,21 +300,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- ÓRDENES ---
     async function loadOrders() {
-        const cliente = document.getElementById('search-orders-cliente').value;
-        const startDate = document.getElementById('order-start-date').value;
-        const endDate = document.getElementById('order-end-date').value;
-        const url = new URL(window.location.origin + '/api/admin/ordenes');
-        if (cliente) url.searchParams.append('cliente_nombre', cliente);
-        if (startDate) url.searchParams.append('startDate', startDate);
-        if (endDate) url.searchParams.append('endDate', endDate);
-        
-        try {
-            const response = await fetch(url, { headers: apiHeaders });
-            const ordenes = await response.json();
-            const tbody = document.querySelector('#ordenes-table tbody');
-            tbody.innerHTML = ordenes.map(o => `<tr><td>${o.numero_orden}</td><td>${o.cliente_nombre}</td><td>$${parseFloat(o.total).toFixed(2)}</td><td><span class="badge badge-${o.estado.toLowerCase()}">${o.estado}</span></td><td>${new Date(o.created_at).toLocaleDateString()}</td><td><button class="btn btn-sm" onclick="viewOrderDetails(${o.id})">👁️ Ver Detalles</button></td></tr>`).join('');
-        } catch(e) { console.error("Error al cargar órdenes:", e); }
-    }
+    const cliente = document.getElementById('search-orders-cliente').value;
+    const startDate = document.getElementById('order-start-date').value;
+    const endDate = document.getElementById('order-end-date').value;
+    const url = new URL(window.location.origin + '/api/admin/ordenes');
+    if (cliente) url.searchParams.append('cliente_nombre', cliente);
+    if (startDate) url.searchParams.append('startDate', startDate);
+    if (endDate) url.searchParams.append('endDate', endDate);
+    
+    try {
+        const response = await fetch(url, { headers: apiHeaders });
+        const ordenes = await response.json();
+        const tbody = document.querySelector('#ordenes-table tbody');
+        tbody.innerHTML = ordenes.map(o => `<tr><td data-label="N° Orden">${o.numero_orden}</td><td data-label="Cliente">${o.cliente_nombre}</td><td data-label="Total">$${parseFloat(o.total).toFixed(2)}</td><td data-label="Estado"><span class="badge badge-${o.estado.toLowerCase()}">${o.estado}</span></td><td data-label="Fecha">${new Date(o.created_at).toLocaleDateString()}</td><td data-label="Acciones"><button class="btn btn-sm" onclick="viewOrderDetails(${o.id})">👁️ Ver Detalles</button></td></tr>`).join('');
+    } catch(e) { console.error("Error al cargar órdenes:", e); }
+}
 
     window.viewOrderDetails = async (id) => {
         try {
@@ -375,21 +385,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
    function renderClients(clients) {
-        const tbody = document.querySelector('#clientes-table tbody');
-        tbody.innerHTML = clients.map(c => `
-            <tr>
-                <td>${c.nombre} ${c.apellido || ''}</td>
-                <td>${c.email}</td>
-                <td><span class="badge ${c.activo ? 'badge-success' : 'badge-danger'}">${c.activo ? 'Activo' : 'Inactivo'}</span></td>
-                <td>
-                    <button class="btn btn-sm btn-info" onclick="openEditClientModal(${c.id})"><i class="fas fa-edit"></i> Editar</button>
-                    <button class="btn btn-sm btn-success" onclick="viewClientPurchases(${c.id})"><i class="fas fa-shopping-bag"></i> Ver Compras</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteClient(${c.id})"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                </td>
-            </tr>
-        `).join('');
-    }
-
+    const tbody = document.querySelector('#clientes-table tbody');
+    tbody.innerHTML = clients.map(c => `
+        <tr>
+            <td data-label="Nombre">${c.nombre} ${c.apellido || ''}</td>
+            <td data-label="Email">${c.email}</td>
+            <td data-label="Estado"><span class="badge ${c.activo ? 'badge-success' : 'badge-danger'}">${c.activo ? 'Activo' : 'Inactivo'}</span></td>
+            <td data-label="Acciones">
+                <button class="btn btn-sm btn-info" onclick="openEditClientModal(${c.id})"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-sm btn-success" onclick="viewClientPurchases(${c.id})"><i class="fas fa-shopping-bag"></i> Ver Compras</button>
+            </td>
+        </tr>
+    `).join('');
+}
     async function handleClientEditSubmit(e) {
         e.preventDefault();
         const id = document.getElementById('client-id').value;
@@ -464,25 +472,25 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
    async function loadAdmins() {
-        try {
-            const response = await fetch('/api/admin/usuarios/admins', { headers: apiHeaders });
-            allAdmins = await response.json();
-            const tbody = document.querySelector('#admins-table tbody');
-            tbody.innerHTML = allAdmins.map(a => `
-                <tr>
-                    <td>${a.nombre} ${a.apellido || ''}</td>
-                    <td>${a.email}</td>
-                    <td>${a.nombre_rol}</td>
-                    <td>
-                        ${ a.id !== currentAdminId ? 
-                           `<button class="btn btn-sm btn-danger" onclick="deleteAdmin(${a.id})"><i class="fas fa-trash-alt"></i> Eliminar</button>` : 
-                           'Cuenta Actual' 
-                        }
-                    </td>
-                </tr>
-            `).join('');
-        } catch (error) { console.error("Error al cargar administradores:", error); }
-    }
+    try {
+        const response = await fetch('/api/admin/usuarios/admins', { headers: apiHeaders });
+        allAdmins = await response.json();
+        const tbody = document.querySelector('#admins-table tbody');
+        tbody.innerHTML = allAdmins.map(a => `
+            <tr>
+                <td data-label="Nombre">${a.nombre} ${a.apellido || ''}</td>
+                <td data-label="Email">${a.email}</td>
+                <td data-label="Rol">${a.nombre_rol}</td>
+                <td data-label="Acciones">
+                    ${ a.id !== currentAdminId ? 
+                       `<button class="btn btn-sm btn-danger" onclick="deleteAdmin(${a.id})"><i class="fas fa-trash-alt"></i> Eliminar</button>` : 
+                       'Cuenta Actual' 
+                    }
+                </td>
+            </tr>
+        `).join('');
+    } catch (error) { console.error("Error al cargar administradores:", error); }
+}
     window.deleteAdmin = async (id) => {
         if (!confirm('¿Estás seguro de que quieres eliminar a este administrador? Esta acción es irreversible.')) return;
         try {
@@ -542,21 +550,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function renderStock(stockData) {
-        const tbody = document.querySelector('#stock-table tbody');
-        tbody.innerHTML = stockData.map(p => {
-            const estado = p.stock_actual > p.stock_minimo ? 'ok' : (p.stock_actual > 0 ? 'bajo' : 'agotado');
-            const estadoClass = { ok: 'success', bajo: 'warning', agotado: 'danger' }[estado];
-            return `<tr>
-                        <td>${p.sku || 'N/A'}</td>
-                        <td>${p.nombre}</td>
-                        <td>${p.stock_inicial}</td>
-                        <td>${p.unidades_vendidas}</td>
-                        <td>${p.stock_actual}</td>
-                        <td>${p.stock_minimo}</td>
-                        <td><span class="badge badge-${estadoClass}">${estado.toUpperCase()}</span></td>
-                    </tr>`;
-        }).join('');
-    }
+    const tbody = document.querySelector('#stock-table tbody');
+    tbody.innerHTML = stockData.map(p => {
+        const estado = p.stock_actual > p.stock_minimo ? 'ok' : (p.stock_actual > 0 ? 'bajo' : 'agotado');
+        const estadoClass = { ok: 'success', bajo: 'warning', agotado: 'danger' }[estado];
+        return `<tr>
+                    <td data-label="SKU">${p.sku || 'N/A'}</td>
+                    <td data-label="Producto">${p.nombre}</td>
+                    <td data-label="Stock Inicial">${p.stock_inicial}</td>
+                    <td data-label="Unidades Vendidas">${p.unidades_vendidas}</td>
+                    <td data-label="Stock Actual">${p.stock_actual}</td>
+                    <td data-label="Stock Mínimo">${p.stock_minimo}</td>
+                    <td data-label="Estado"><span class="badge badge-${estadoClass}">${estado.toUpperCase()}</span></td>
+                </tr>`;
+    }).join('');
+}
 
      function exportStockToExcel() {
         // 1. Preparar los datos y los encabezados

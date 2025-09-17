@@ -26,24 +26,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     const saveButton = document.getElementById('save-shipping-btn');
     const cancelButton = document.getElementById('cancel-edit-btn');
 
-    function renderShippingDetails(isEditing = false) {
-        if (isEditing) {
-            shippingDetailsContainer.innerHTML = `
-                <div class="shipping-field"><strong>Nombre:</strong> <span>${userData.user.nombre}</span></div>
-                <div class="shipping-field"><strong>Email:</strong> <span>${userData.user.email}</span></div>
-                <div class="shipping-field"><strong>Teléfono:</strong><input type="tel" id="shipping-telefono" value="${userData.user.telefono || ''}"></div>
-                <div class="shipping-field"><strong>Ciudad:</strong><input type="text" id="shipping-ciudad" value="${userData.user.ciudad || ''}"></div>
-                <div class="shipping-field"><strong>Dirección:</strong><textarea id="shipping-direccion" rows="3">${userData.user.direccion || ''}</textarea></div>`;
-        } else {
-            shippingDetailsContainer.innerHTML = `
-                <p><strong>Nombre:</strong> ${userData.user.nombre}</p>
-                <p><strong>Email:</strong> ${userData.user.email}</p>
-                <p><strong>Teléfono:</strong> ${userData.user.telefono || 'No especificado'}</p>
-                <p><strong>Ciudad:</strong> ${userData.user.ciudad || 'No especificada'}</p>
-                <p><strong>Dirección:</strong> ${userData.user.direccion || 'No especificada'}</p>`;
-        }
+   // Reemplaza la función completa en checkout.js
+function renderShippingDetails(isEditing = false) {
+    if (isEditing) {
+        // --- NUEVA ESTRUCTURA DE FORMULARIO MEJORADA ---
+        shippingDetailsContainer.innerHTML = `
+            <div class="shipping-edit-form">
+                <div class="form-field">
+                    <label for="shipping-telefono">Teléfono:</label>
+                    <input type="tel" id="shipping-telefono" value="${userData.user.telefono || ''}">
+                </div>
+                <div class="form-field">
+                    <label for="shipping-ciudad">Ciudad:</label>
+                    <input type="text" id="shipping-ciudad" value="${userData.user.ciudad || ''}">
+                </div>
+                <div class="form-field">
+                    <label for="shipping-direccion">Dirección:</label>
+                    <textarea id="shipping-direccion" rows="3">${userData.user.direccion || ''}</textarea>
+                </div>
+            </div>
+            <p><strong>Nombre:</strong> ${userData.user.nombre}</p>
+            <p><strong>Email:</strong> ${userData.user.email}</p>
+        `;
+    } else {
+        shippingDetailsContainer.innerHTML = `
+            <p><strong>Nombre:</strong> ${userData.user.nombre}</p>
+            <p><strong>Email:</strong> ${userData.user.email}</p>
+            <p><strong>Teléfono:</strong> ${userData.user.telefono || 'No especificado'}</p>
+            <p><strong>Ciudad:</strong> ${userData.user.ciudad || 'No especificada'}</p>
+            <p><strong>Dirección:</strong> ${userData.user.direccion || 'No especificada'}</p>`;
     }
-
+}
     editButton.addEventListener('click', () => {
         renderShippingDetails(true);
         editButton.classList.add('hidden');
@@ -56,39 +69,83 @@ document.addEventListener('DOMContentLoaded', async () => {
         editButton.classList.remove('hidden');
     });
 
-    saveButton.addEventListener('click', async () => {
-        const newDetails = {
-            telefono: document.getElementById('shipping-telefono').value,
-            ciudad: document.getElementById('shipping-ciudad').value,
-            direccion: document.getElementById('shipping-direccion').value
-        };
-        try {
-            const response = await fetch('/api/user/shipping-details', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userData.token}` },
-                body: JSON.stringify(newDetails)
-            });
-            if (!response.ok) throw new Error('No se pudo actualizar la información.');
-            userData.user.telefono = newDetails.telefono;
-            userData.user.ciudad = newDetails.ciudad;
-            userData.user.direccion = newDetails.direccion;
-            localStorage.setItem('maxiUser', JSON.stringify(userData));
-            renderShippingDetails(false);
-            actionsContainer.classList.add('hidden');
-            editButton.classList.remove('hidden');
-            alert('¡Información de envío actualizada exitosamente!');
-        } catch (error) {
-            alert('Hubo un error al guardar los cambios.');
-        }
-    });
+    // Reemplaza este bloque completo en checkout.js
+
+saveButton.addEventListener('click', async () => {
+    const newDetails = {
+        telefono: document.getElementById('shipping-telefono').value,
+        ciudad: document.getElementById('shipping-ciudad').value,
+        direccion: document.getElementById('shipping-direccion').value
+    };
+    try {
+        const response = await fetch('/api/user/shipping-details', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${userData.token}` },
+            body: JSON.stringify(newDetails)
+        });
+        if (!response.ok) throw new Error('No se pudo actualizar la información.');
+        
+        // Actualizamos los datos del usuario en el navegador
+        userData.user.telefono = newDetails.telefono;
+        userData.user.ciudad = newDetails.ciudad;
+        userData.user.direccion = newDetails.direccion;
+        localStorage.setItem('maxiUser', JSON.stringify(userData));
+        
+        // Mostramos la vista normal (no edición)
+        renderShippingDetails(false);
+        actionsContainer.classList.add('hidden');
+        editButton.classList.remove('hidden');
+
+        // --- REEMPLAZO DEL ALERT() ---
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '¡Información actualizada!',
+            showConfirmButton: false,
+            timer: 2000, // La notificación desaparecerá después de 2 segundos
+            background: '#232b38',
+            color: '#ffffff'
+        });
+
+    } catch (error) {
+        // Mensaje de error mejorado
+        Swal.fire({
+            icon: 'error',
+            title: 'Hubo un error',
+            text: 'No pudimos guardar los cambios. Por favor, intenta de nuevo.',
+            background: '#232b38',
+            color: '#ffffff',
+            confirmButtonColor: '#667eea'
+        });
+    }
+});
+   // Reemplaza este bloque en checkout.js
 
     let total = 0;
-    document.getElementById('cart-summary').innerHTML = cart.map(item => {
+    const cartSummaryContainer = document.getElementById('cart-summary');
+    const cartSummaryMobileContainer = document.getElementById('cart-summary-mobile'); // <-- Nuevo selector para móvil
+
+    const itemsHTML = cart.map(item => {
         const subtotal = item.precio * item.cantidad;
         total += subtotal;
-        return `<div class="cart-item-summary"><img src="${item.imagen}" alt="${item.nombre}"><div class="info"><span class="name">${item.nombre} (x${item.cantidad})</span></div><span class="price">$${subtotal.toFixed(2)}</span></div>`;
+        return `<div class="cart-item-summary">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div class="info">
+                        <span class="name">${item.nombre} (x${item.cantidad})</span>
+                    </div>
+                    <span class="price">$${subtotal.toFixed(2)}</span>
+                </div>`;
     }).join('');
+
+    // --- LA CORRECCIÓN CLAVE ---
+    // Llenamos ambos contenedores (desktop y móvil) con la misma información
+    if(cartSummaryContainer) cartSummaryContainer.innerHTML = itemsHTML;
+    if(cartSummaryMobileContainer) cartSummaryMobileContainer.innerHTML = itemsHTML;
+
+    // Actualizamos los totales en ambas vistas
     document.getElementById('total-amount').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('mobile-total-amount').textContent = `$${total.toFixed(2)}`; // <-- Nuevo actualizador para móvil
 
     // --- 3. Lógica de Pago (Stripe y Contra Entrega) ---
     const stripe = Stripe('pk_test_51S1Xxf2WXEgLpiM8HxC4f5JThhpBCeLzaWSYgTCIlDMzBIoXkXWtiy9uwCepQLyFYPe8SDmVHiB4rP4rwq9JsuCZ00a1vid7xj');

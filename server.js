@@ -654,6 +654,7 @@ app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'public', 'HTM
 // =================================================================
 // VI. INICIO DEL SERVIDOR
 // =================================================================
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    console.log(`Accesible en tu red local en http://192.168.1.45:${PORT}`);
 });

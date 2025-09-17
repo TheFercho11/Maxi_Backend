@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrónica</title>
+    <title>Electrónica - Maxi Despensa</title>
     <link rel="icon" type="image/png" href="/IMG/logo.png">
-    <link rel="stylesheet" href="/CSS/Electronica/electronica.css">
+    <link rel="stylesheet" href="/CSS/Estilos.css">
+    <link rel="stylesheet" href="/CSS/productos.css">
 </head>
-<body>
-   
-     <div class="barra-superior"> <div > 
+<body> 
+    <div class="barra-superior"> 
+        <div> 
             <a href="" class="info" > 
                 <img src="/IMG/informacion.png" alt="comprar-icon"class="pregunta-icon" > Como comprar
             </a>
@@ -18,106 +19,88 @@
             </a>
         </div>
     </div>
+
     <header class="barra-principal">
-      <img src="/IMG/banner.png" alt="banner-maxi-despensa" class="banner-maxi"> <img src="/IMG/background-header-desktop___7f36e91bd264dfaa0476c04510b9383a.svg" alt="fondo-maxi-despensa" class="fondo-maxi">
-  <div class="seccion-izquierda">
-    <a href="/HTML/index.html" class="logo-link">
-      <img src="/IMG/logo.png" alt="Maxi Despensa" class="logo">
-      <span class="nombre-empresa">Maxi Despensa
-        <span class="eslogan">Variedad y ahorro en grande</span>
-      </span>
-    </a>
-  </div>
-
-  <div class="seccion-centro">
-    <input type="search" placeholder="Buscar producto..." class="barra-busqueda">
-    <button class="boton-buscar">
-      <img src="/IMG/lupa.png" alt="lupa" class="lupa">
-    </button>
-  </div>
-
-  <div class="seccion-derecha">
-    <div class="icono-favorito popup-container">
-      <img src="/IMG/favorito.png" alt="favorito" class="favorito-png">
-      <span class="nombre-favorito">Favorito</span>
-      <div class="popup contenido-favorito">
-        <h4>Favoritos</h4>
-        <p>No tienes productos favoritos aún.</p>
-      </div>
+    <div class="plasma-container">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
     </div>
-
-    <div class="icono-cuenta popup-container">
-    <img src="/IMG/usuario.png" alt="cuenta" class="cuenta-png">
-    <span class="nombre-usuario">Usuario</span>
-
-    <div class="popup contenido-usuario">
-        <div class="usuario-opciones">
-            <button class="btn-iniciar">Iniciar Sesión</button>
-            <button class="btn-registrar">Registrarse</button>
+    <div class="contenido-barra">
+        <div class="seccion-izquierda">
+            <a href="/HTML/index.html" class="logo-link">
+                <img src="/IMG/logo.png" alt="Maxi Despensa" class="logo">
+                <span class="nombre-empresa">Maxi Despensa
+                    <span class="eslogan">Variedad y ahorro en grande</span>
+                </span>
+            </a>
         </div>
-        <a href="/HTML/Login Administrador.html" class="btn-admin">Login Administrador</a>
-
-        <form class="form-iniciar" style="display:none;">
-    <h4>Iniciar Sesión</h4>
-    <input type="email" placeholder="Correo Electrónico" name="email" required>
-    <input type="password" placeholder="Contraseña" name="password" required>
-    <button type="submit">Entrar</button>
-    <p class="volver">← Volver</p>
-</form>
-
-        <form class="form-registrar" style="display:none;">
-    <h4>Registrarse</h4>
-    <input type="text" placeholder="Nombre(s)" name="nombre" required>
-    <input type="text" placeholder="Apellido(s)" name="apellido" required>
-    <input type="email" placeholder="Correo Electrónico" name="email" required>
-    <input type="tel" placeholder="Teléfono (Ej: 7788-9900)" name="telefono">
-    <input type="text" placeholder="Ciudad" name="ciudad">
-    <textarea placeholder="Dirección Completa" name="direccion" rows="2"></textarea>
-    <input type="password" placeholder="Contraseña" name="password" required>
-    <input type="password" placeholder="Confirmar Contraseña" name="password_confirm" required>
-    <button type="submit">Registrarse</button>
-    <p class="volver">← Volver</p>
-</form>
-    </div>
-</div>
-
-
-    <div class="icono-carrito popup-container">
-    <img src="/IMG/carrito.png" alt="carrito" class="carrito-png">
-    <span class="nombre-carrito">Carrito</span>
-    <span class="contador">0</span>
-
-    <div class="popup contenido-carrito">
-        <h4>Tu Carrito</h4>
-
-        <div class="carrito-items">
-            <div class="carrito-item">
-                <img src="/IMG/producto1.png" alt="Producto 1">
-                <div class="info">
-                    <span class="nombre">Producto 1</span>
-                    <span class="cantidad">Cantidad: 1</span>
-                    <span class="precio">$10.00</span>
+        <div class="seccion-centro">
+            <input type="search" placeholder="Buscar producto..." class="barra-busqueda">
+            <button class="boton-buscar">
+                <img src="/IMG/lupa.png" alt="lupa" class="lupa">
+            </button>
+        </div>
+        <div class="seccion-derecha">
+            <div class="icono-favorito popup-container">
+                <img src="/IMG/favorito.png" alt="favorito" class="favorito-png">
+                <span class="nombre-favorito">Favorito</span>
+                <div class="popup contenido-favorito">
+                    <h4>Favoritos</h4>
+                    <p>No tienes productos favoritos aún.</p>
                 </div>
-                <button class="eliminar">✕</button>
+            </div>
+            <div class="icono-cuenta popup-container">
+                <img src="/IMG/usuario.png" alt="cuenta" class="cuenta-png">
+                <span class="nombre-usuario">Usuario</span>
+                <div class="popup contenido-usuario">
+                    <div class="usuario-opciones">
+                        <button class="btn-iniciar">Iniciar Sesión</button>
+                        <button class="btn-registrar">Registrarse</button>
+                    </div>
+                    <a href="/HTML/Login Administrador.html" class="btn-admin">Login Administrador</a>
+                    <form class="form-iniciar" style="display:none;">
+                        <h4>Iniciar Sesión</h4>
+                        <input type="email" placeholder="Correo Electrónico" name="email" required>
+                        <input type="password" placeholder="Contraseña" name="password" required>
+                        <button type="submit">Entrar</button>
+                        <p class="volver">← Volver</p>
+                    </form>
+                    <form class="form-registrar" style="display:none;">
+                        <h4>Registrarse</h4>
+                        <input type="text" placeholder="Nombre(s)" name="nombre" required>
+                        <input type="text" placeholder="Apellido(s)" name="apellido" required>
+                        <input type="email" placeholder="Correo Electrónico" name="email" required>
+                        <input type="tel" placeholder="Teléfono (Ej: 2121-2828)" name="telefono">
+                        <input type="text" placeholder="Ciudad" name="ciudad">
+                        <textarea placeholder="Dirección Completa" name="direccion" rows="2"></textarea>
+                        <input type="password" placeholder="Contraseña" name="password" required>
+                        <input type="password" placeholder="Confirmar Contraseña" name="password_confirm" required>
+                        <button type="submit">Registrarse</button>
+                        <p class="volver">← Volver</p>
+                    </form>
+                </div>
+            </div>
+            <div class="icono-carrito popup-container">
+                <img src="/IMG/carrito.png" alt="carrito" class="carrito-png">
+                <span class="nombre-carrito">Carrito</span>
+                <span class="contador">0</span>
+                <div class="popup contenido-carrito">
+                </div>
             </div>
         </div>
-
-        <div class="total">
-            <span>Total:</span>
-            <span class="monto">$10.00</span>
-        </div>
-
-        <button class="btn-checkout">Ir al Checkout</button>
-        <p class="vaciar-carrito">Vaciar Carrito</p>
     </div>
+    </header>
+
+    <div class="wave-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180">
+        <path fill="#2c5b36" fill-opacity="1" d="M0,96L80,85.3C160,75,320,53,480,58.7C640,64,800,96,960,106.7C1120,117,1280,107,1360,101.3L1440,96L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path>
+    </svg>
 </div>
 
-  </div>
-</header>
     <header class="categorias">
        <h2 class="name-categoria">Categorías</h2>
         <div class="categorias-contenedor"> 
-            
             <a href="/HTML/Electronica/electronica.html" class="electronica">
                 <img src="/IMG/electronica.png" alt="Electronica" class="electronica-imagen">
                 <span class="electronica-nombre">Electronica</span>
@@ -131,84 +114,72 @@
                 <span class="hogar-nombre">Articulos para el Hogar</span>
             </a>
         </div>
-        
     </header> 
-    <div class="marquesina">
-       <p>🌟 Maxi Despensa: ¡Precios bajos todos los días! 🌟</p>
-    </div>
 
-    <h1 style="text-align:center; ">Catálogo Electrónica</h1>
+    <h1 style="text-align:center; margin-top: 40px; font-family: 'Poppins', sans-serif;">Catálogo Electrónica</h1>
     <div class="productos" id="productos-container">
         </div>
-
-
-     <script src="/JS/electronica.js"></script>
-     <script src="/JS/inicio.js"></script>
-
-     <footer class="pie-pagina">
-    <div class="pie-suscripcion">
-        <h2>Programa tu día y hora de entrega</h2>
-        <h3>Pago con efectivo o tarjeta</h3>
-        <p class="compra-segura">Compra 100% segura</p>
-        
-        <div class="boletin">
-            <p>¡Recibe las mejores ofertas y promociones!</p>
-            <form class="formulario-suscripcion">
-                <input type="email" placeholder="Ingresa tu correo" required>
-                <button type="submit">Suscríbeme</button>
-            </form>
+      
+    <footer class="pie-pagina">
+        <div class="pie-suscripcion">
+            <h2>Programa tu día y hora de entrega</h2>
+            <h3>Pago con efectivo o tarjeta</h3>
+            <p class="compra-segura">Compra 100% segura</p>
+            <div class="boletin">
+                <p>¡Recibe las mejores ofertas y promociones!</p>
+                <form class="formulario-suscripcion">
+                    <input type="email" placeholder="Ingresa tu correo" required>
+                    <button type="submit">Suscríbeme</button>
+                </form>
+            </div>
+            <p class="privacidad">
+                Al suscribirme, acepto el <strong>Aviso de Privacidad y los Términos y Condiciones</strong>, así como el envío de noticias y promociones exclusivas de Maxi Despensa.
+            </p>
         </div>
-        
-        <p class="privacidad">
-            Al suscribirme, acepto el <strong>Aviso de Privacidad y los Términos y Condiciones</strong>, así como el envío de noticias y promociones exclusivas de Maxi Despensa.
-        </p>
-    </div>
+        <div class="pie-enlaces">
+            <div class="columna">
+                <h4>Conexiones</h4>
+                <ul>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Aviso de Privacidad-Commerce</a></li>
+                    <li><a href="#">Consultaciones y devoluciones</a></li>
+                    <li><a href="#">Reglamento de promociones</a></li>
+                    <li><a href="#">Maxi Dispensa te escucha</a></li>
+                    <li><a href="#">Catalogo Digital</a></li>
+                </ul>
+            </div>
+            <div class="columna">
+                <h4>¿Necesitas ayuda?</h4>
+                <ul>
+                    <li><a href="#">¿Cómo comprar en línea?</a></li>
+                    <li><a href="#">Reventar textos</a></li>
+                    <li><a href="#">Integrar la presente</a></li>
+                    <li><a href="#">Contábil de contenido</a></li>
+                    <li>Lídenes: 4.000.2000 / 22 (tema gratuita)</li>
+                </ul>
+            </div>
+            <div class="columna">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#">Tarjeta de regalo</a></li>
+                    <li><a href="#">Otros servicios</a></li>
+                    <li><a href="#">Recrear</a></li>
+                    <li><a href="#">Ajuste de servicios</a></li>
+                </ul>
+            </div>
+            <div class="columna">
+                <h4>Físmicitamiento</h4>
+                <ul>
+                    <li><a href="#">Tarjeta de orden</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="pie-derechos">
+            <p>©2025 Copyright. Todos los derechos reservados a Maxi-Despensa  S.A de C.V .</p>
+        </div>
+    </footer>
 
-    <div class="pie-enlaces">
-        <div class="columna">
-            <h4>Conexiones</h4>
-            <ul>
-                <li><a href="#">Términos y Condiciones</a></li>
-                <li><a href="#">Aviso de Privacidad-Commerce</a></li>
-                <li><a href="#">Consultaciones y devoluciones</a></li>
-                <li><a href="#">Reglamento de promociones</a></li>
-                <li><a href="#">Maxi Dispensa te escucha</a></li>
-                <li><a href="#">Catalogo Digital</a></li>
-            </ul>
-        </div>
-        
-        <div class="columna">
-            <h4>¿Necesitas ayuda?</h4>
-            <ul>
-                <li><a href="#">¿Cómo comprar en línea?</a></li>
-                <li><a href="#">Reventar textos</a></li>
-                <li><a href="#">Integrar la presente</a></li>
-                <li><a href="#">Contábil de contenido</a></li>
-                <li>Lídenes: 4.000.2000 / 22 (tema gratuita)</li>
-            </ul>
-        </div>
-        
-        <div class="columna">
-            <h4>Servicios</h4>
-            <ul>
-                <li><a href="#">Tarjeta de regalo</a></li>
-                <li><a href="#">Otros servicios</a></li>
-                <li><a href="#">Recrear</a></li>
-                <li><a href="#">Ajuste de servicios</a></li>
-            </ul>
-        </div>
-        
-        <div class="columna">
-            <h4>Físmicitamiento</h4>
-            <ul>
-                <li><a href="#">Tarjeta de orden</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="pie-derechos">
-        <p>©2025 Copyright. Todos los derechos reservados a Maxi-Despensa  S.A de C.V .</p>
-    </div>
-</footer>
+    <script src="/JS/inicio.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

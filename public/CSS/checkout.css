@@ -1,225 +1,247 @@
+/* === ESTILOS MODERNOS Y RESPONSIVOS PARA CHECKOUT (v2) === */
+
+/* --- Configuración General --- */
 body {
-    background-color: #9cd4a8;
+    background-color: #f8f9fa; /* Un fondo gris muy claro y profesional */
+    font-family: 'Poppins', sans-serif;
 }
 
 .checkout-container {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.checkout-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-}
-
-.checkout-form, .order-summary {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-}
-
-h2 {
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
-}
-
-/* --- Formulario de Envío y Pago --- */
-#shipping-details p {
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-#shipping-details strong {
-    font-weight: 600;
-    color: #333;
-}
-
-.payment-methods {
-    margin-top: 20px;
-}
-.payment-option {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.payment-option:hover {
-    border-color: #667eea;
-}
-.payment-option input[type="radio"] {
-    margin-right: 10px;
-}
-
-/* --- Resumen del Pedido --- */
-.cart-item-summary {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-.cart-item-summary img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 15px;
-}
-.cart-item-summary .info {
-    flex-grow: 1;
-    background-color: #27ae60;
-}
-.cart-item-summary .info .name {
-    font-weight: 600;
-}
-.cart-item-summary .price {
-    font-weight: bold;
-    color: #333;
-}
-
-.summary-total {
+/* --- Cabecera Simplificada --- */
+.checkout-header {
     display: flex;
     justify-content: space-between;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 2px solid #f0f0f0;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+}
+.checkout-header .logo-link { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.checkout-header .logo { width: 40px; height: auto; }
+.checkout-header .nombre-empresa { font-size: 1.2rem; font-weight: 700; color: #34495E; }
+.secure-checkout-badge { display: flex; align-items: center; gap: 8px; color: #27ae60; font-weight: 600; }
+.secure-checkout-badge svg { fill: #27ae60; }
+
+/* --- Cuadrícula Principal (Desktop) --- */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Formulario más ancho que el resumen */
+    gap: 40px;
+    align-items: flex-start; /* Alinea las columnas arriba */
 }
 
-.btn-checkout {
+/* --- Secciones del Formulario --- */
+.checkout-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.section-header h2 { font-size: 1.3rem; margin: 0; }
+
+/* --- Detalles de Envío y Botones de Acción --- */
+#shipping-details p { margin: 8px 0; line-height: 1.6; }
+#shipping-details strong { color: #34495E; }
+.form-actions { display: flex; gap: 10px; margin-top: 20px; }
+.hidden { display: none !important; }
+
+/* --- Selección de Método de Pago --- */
+.payment-methods { display: flex; flex-direction: column; gap: 15px; }
+.payment-option {
+    padding: 15px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.payment-option:hover { border-color: #667eea; }
+.payment-option input[type="radio"]:checked + span { font-weight: 700; color: #667eea; }
+
+/* --- Botón Principal de Checkout --- */
+.btn-checkout-main {
     width: 100%;
     padding: 15px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-top: 20px;
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(102,126,234,0.3);
 }
-.btn-checkout:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
-}
+.btn-checkout-main:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(102,126,234,0.4); }
 
-/* --- Mensajes de Autenticación --- */
-.auth-message {
-    text-align: center;
-    padding: 40px;
-    background-color: #fff;
+/* --- Resumen del Pedido (Desktop) --- */
+.order-summary-container {
+    position: sticky; /* Hacemos que se quede fijo al hacer scroll */
+    top: 20px;
+}
+.order-summary {
+    background-color: #ffffff;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
-.auth-message h2 {
-    font-size: 1.8rem;
-    color: #e74c3c;
-}
-.auth-message p {
-    font-size: 1.2rem;
-    margin: 20px 0;
-}
-.auth-message .btn-login {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #667eea;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    transition: background-color 0.3s;
-}
-.auth-message .btn-login:hover {
-    background-color: #5a6fd8;
-}
-/* --- Estilos para el Formulario de Stripe --- */
-#payment-form {
-  margin-top: 20px;
-}
+.mobile-summary-toggle { display: none; } /* Oculto en desktop */
+.desktop-summary-title { font-size: 1.3rem; margin: 0 0 20px 0; }
+.cart-summary-items { max-height: 400px; overflow-y: auto; padding-right: 10px; }
+.cart-item-summary { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.cart-item-summary img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+.cart-item-summary .info { flex-grow: 1; }
+.cart-item-summary .name { font-weight: 600; display: block; }
+.summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid #e9ecef; }
+.summary-total-price { font-size: 1.4rem; font-weight: 700; color: #34495E; }
 
-#payment-element {
-  margin-bottom: 24px;
-}
+/* --- Mensajes (Login requerido, carrito vacío) --- */
+.auth-message { text-align: center; padding: 40px; background-color: #fff; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+.auth-message h2 { font-size: 1.8rem; color: #e74c3c; }
+.auth-message p { font-size: 1.2rem; margin: 20px 0; }
+.auth-message .btn-login { display: inline-block; padding: 12px 25px; background-color: #667eea; color: white; text-decoration: none; border-radius: 8px; font-size: 1.1rem; transition: background-color 0.3s; }
+.auth-message .btn-login:hover { background-color: #5a6fd8; }
 
-/* Clases para el mensaje de estado del pago */
-#payment-message {
-  color: rgb(105, 115, 134);
-  font-size: 16px;
-  line-height: 20px;
-  padding-top: 12px;
-  text-align: center;
-}
 
-#payment-message.hidden {
-  display: none;
+/* === VISTA MÓVIL (Menos de 768px de ancho) === */
+@media (max-width: 768px) {
+    .checkout-grid {
+        grid-template-columns: 1fr; /* Apilamos las columnas */
+    }
+    .order-summary-container {
+        position: static; /* Quitamos el efecto "pegajoso" */
+        order: -1; /* Movemos el resumen del pedido al principio */
+    }
+    .desktop-summary-title, #cart-summary, .summary-total {
+        display: none; /* Ocultamos la versión de escritorio del resumen */
+    }
+    .mobile-summary-toggle {
+        display: block; /* Mostramos el acordeón para móvil */
+        width: 100%;
+    }
+    .mobile-summary-toggle summary {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 10px 0;
+    }
+    .checkout-section, .order-summary {
+        padding: 20px;
+    }
+    .checkout-header {
+        padding: 15px;
+    }
+    .checkout-header .nombre-empresa {
+        font-size: 1rem;
+    }
 }
+/* === ESTILOS PARA EL FORMULARIO DE EDICIÓN DE ENVÍO === */
 
-/* --- Estilos para el botón de editar --- */
-.checkout-form .section-header {
+.shipping-edit-form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #f0f0f0;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre cada campo del formulario */
+    margin-bottom: 20px; /* Espacio antes de mostrar el nombre y email */
 }
 
-.checkout-form h2 {
-    margin-bottom: 0;
-    border-bottom: none;
-    padding-bottom: 10px;
+.form-field {
+    display: flex;
+    flex-direction: column;
 }
 
-.btn.btn-secondary {
-    background-color: #e9ecef;
-    color: #495057;
-    border: 1px solid #ced4da;
-    padding: 8px 15px;
+.form-field label {
+    font-weight: 600;
+    color: #34495E;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.form-field textarea {
+    resize: vertical; /* Permite al usuario ajustar la altura del textarea */
+}
+
+/* === ESTILOS PARA BOTONES DE ACCIÓN (GUARDAR/CANCELAR) === */
+
+.form-actions .btn {
+    padding: 10px 20px;
+    border: none;
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
-.btn.btn-secondary:hover {
+/* Botón Guardar Cambios (Verde) */
+.form-actions .btn-success {
+    background-color: #27ae60;
+    color: white;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
+}
+
+.form-actions .btn-success:hover {
+    background-color: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+}
+
+/* Botón Cancelar (Gris) */
+.form-actions .btn-secondary {
+    background-color: #e9ecef;
+    color: #495057;
+    border: 1px solid #ced4da;
+}
+
+.form-actions .btn-secondary:hover {
     background-color: #dee2e6;
     border-color: #b1b9c1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+}
+/* === AJUSTE FINAL DE LEGIBILIDAD EN RESUMEN DE PEDIDO === */
+
+.cart-item-summary .info .name {
+    color: #34495E; /* Color más oscuro y profesional */
+    font-weight: 700; /* Texto en negrita para que resalte */
 }
 
-/* --- Nuevos estilos para edición en el lugar --- */
-.shipping-field {
-    margin-bottom: 15px;
-}
-
-.shipping-field strong {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.shipping-field input,
-.shipping-field textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: inherit;
-}
-
-.form-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none !important;
+/* Opcional: un color un poco más claro para la cantidad */
+.cart-item-summary .info .quantity {
+    color: #5a6a7a; 
+    font-size: 0.9rem;
 }
