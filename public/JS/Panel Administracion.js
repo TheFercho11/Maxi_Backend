@@ -394,6 +394,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
             <td data-label="Acciones">
                 <button class="btn btn-sm btn-info" onclick="openEditClientModal(${c.id})"><i class="fas fa-edit"></i> Editar</button>
                 <button class="btn btn-sm btn-success" onclick="viewClientPurchases(${c.id})"><i class="fas fa-shopping-bag"></i> Ver Compras</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteClient(${c.id})"><i class="fas fa-trash-alt"></i> Eliminar</button>
             </td>
         </tr>
     `).join('');

@@ -1,7 +1,8 @@
+/* === ARCHIVO DE ESTILOS COMPLETO Y CORREGIDO FINAL === */
+
 body {
     margin: 0;
     padding: 0;
-    /* Es buena práctica añadir esto para que el cálculo de anchos y paddings sea más intuitivo */
     box-sizing: border-box; 
 }
 
@@ -9,18 +10,16 @@ body {
     box-sizing: inherit;
 }
 
-/* --- ESTILOS PARA ESCRITORIO (Desktop First) --- */
-
+/* --- BARRA SUPERIOR --- */
 .barra-superior {
     background: linear-gradient(to right, #3b6d48, #2C3E50);
-    padding: 8px 0; /* Un poco menos de padding vertical para un look más fino */
+    padding: 8px 0;
     position: relative;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 .barra-superior-contenido {
     width: 100%;
     max-width: 1400px;
@@ -29,7 +28,6 @@ body {
     align-items: center;
     padding: 0 40px;
 }
-
 .pregunta-icon {
     width: 20px;
     height: 20px;
@@ -37,7 +35,6 @@ body {
     filter: brightness(1.8);
     transition: transform 0.3s ease;
 }
-
 .info, .numero {
     color: #ECF0F1;
     text-decoration: none;
@@ -52,8 +49,6 @@ body {
     overflow: hidden;
     font-size: 0.95em;
 }
-
-/* Efectos hover que ya tenías y te gustaban */
 .info::before, .numero::before {
     content: '';
     position: absolute;
@@ -64,60 +59,21 @@ body {
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     transition: left 0.5s ease;
 }
-
-.info:hover::before, .numero:hover::before {
-    left: 100%;
-}
-
+.info:hover::before, .numero:hover::before { left: 100%; }
 .info:hover, .numero:hover {
     background: rgba(255,255,255,0.15);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
-
-.info:hover .pregunta-icon, .numero:hover .pregunta-icon {
-    transform: scale(1.1) rotate(5deg);
-}
+.info:hover .pregunta-icon, .numero:hover .pregunta-icon { transform: scale(1.1) rotate(5deg); }
 
 
-/* --- ESTILOS RESPONSIVOS --- */
-/* Para tablets y dispositivos móviles (pantallas de 768px de ancho o menos) */
-@media (max-width: 768px) {
-
-    .barra-superior {
-        /* Damos un poco más de espacio vertical en móvil para acomodar los elementos apilados */
-        padding: 12px 0;
-    }
-
-    .barra-superior-contenido {
-        /* Cambiamos la dirección de los elementos de horizontal (row) a vertical (column) */
-        flex-direction: column;
-        
-        /* Añadimos un pequeño espacio entre los elementos apilados */
-        gap: 10px;
-        
-        /* Ajustamos el padding para que no se vea tan apretado en los lados */
-        padding: 0 20px;
-    }
-
-    .info, .numero {
-        /* Centramos el texto por si se parte en dos líneas en pantallas muy pequeñas */
-        text-align: center;
-        font-size: 0.9em; /* Hacemos la fuente un poco más pequeña para que quepa mejor */
-        justify-content: center; /* Asegura que el icono y texto estén centrados juntos */
-    }
-}
-/*fin del primer segmento de linea 1 a 19 de sintaxis del HTML*/
-/* === BARRA PRINCIPAL - ESTILO PROFESIONAL Y MODERNO (v2 Adaptado) === */
-
+/* --- BARRA PRINCIPAL --- */
 .barra-principal {
     position: relative;
-   
     padding: 15px 0;
-    background-color: #2c5b36; /* Color de respaldo */
+    background-color: #2c5b36;
 }
-
-/* --- El Fondo de Plasma Animado (Sin cambios) --- */
 .plasma-container {
     position: absolute;
     top: 0;
@@ -126,51 +82,20 @@ body {
     height: 100%;
     filter: blur(80px);
     z-index: 1;
-    overflow: hidden; /* <--- AÑADE ESTA LÍNEA AQUÍ */
+    overflow: hidden;
 }
-
 .blob {
     position: absolute;
     border-radius: 50%;
     mix-blend-mode: screen;
 }
+.blob:nth-child(1) { background: #4CAF50; width: 350px; height: 350px; top: -50px; left: -100px; animation: moveBlob1 25s infinite alternate ease-in-out; }
+.blob:nth-child(2) { background: #FFC107; width: 300px; height: 300px; bottom: -80px; right: -80px; animation: moveBlob2 30s infinite alternate ease-in-out; }
+.blob:nth-child(3) { background: #F44336; width: 250px; height: 250px; top: 10%; left: 40%; animation: moveBlob3 20s infinite alternate ease-in-out; }
+@keyframes moveBlob1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(150px, 100px) scale(1.2); } }
+@keyframes moveBlob2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-200px, -150px) scale(0.9); } }
+@keyframes moveBlob3 { from { transform: translate(0, 0) rotate(0deg) scale(1); } to { transform: translate(-100px, 50px) rotate(180deg) scale(1.3); } }
 
-.blob:nth-child(1) {
-    background: #4CAF50;
-    width: 350px; height: 350px;
-    top: -50px; left: -100px;
-    animation: moveBlob1 25s infinite alternate ease-in-out;
-}
-
-.blob:nth-child(2) {
-    background: #FFC107;
-    width: 300px; height: 300px;
-    bottom: -80px; right: -80px;
-    animation: moveBlob2 30s infinite alternate ease-in-out;
-}
-
-.blob:nth-child(3) {
-    background: #F44336;
-    width: 250px; height: 250px;
-    top: 10%; left: 40%;
-    animation: moveBlob3 20s infinite alternate ease-in-out;
-}
-
-@keyframes moveBlob1 {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(150px, 100px) scale(1.2); }
-}
-@keyframes moveBlob2 {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(-200px, -150px) scale(0.9); }
-}
-@keyframes moveBlob3 {
-    from { transform: translate(0, 0) rotate(0deg) scale(1); }
-    to { transform: translate(-100px, 50px) rotate(180deg) scale(1.3); }
-}
-
-
-/* --- Contenido de la Barra (Por encima del fondo) --- */
 .contenido-barra {
     position: relative;
     z-index: 2;
@@ -182,944 +107,210 @@ body {
     margin: 0 auto;
     padding: 0 40px;
 }
-
-
-/* --- Secciones Izquierda, Centro y Derecha (Adaptadas a tu HTML) --- */
-
-/* Izquierda: Logo */
 .seccion-izquierda { display: flex; align-items: center; flex-shrink: 0; }
 .logo-link { text-decoration: none; display: flex; align-items: center; gap: 15px; transition: transform 0.3s ease; }
 .logo-link:hover { transform: scale(1.03); }
 .logo { width: 80px; height: auto; }
-.nombre-empresa {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-}
-.eslogan {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 400;
-    font-style: normal; /* El itálico era difícil de leer */
-}
-
-/* Centro: Barra de búsqueda */
+.nombre-empresa { font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 800; color: #ffffff; line-height: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+.eslogan { font-size: 0.85rem; color: rgba(255, 255, 255, 0.9); font-weight: 400; font-style: normal; }
 .seccion-centro { flex-grow: 1; display: flex; justify-content: center; padding: 0 40px; }
 .barra-busqueda { width: 100%; max-width: 500px; padding: 12px 20px; border: 1px solid transparent; border-radius: 50px 0 0 50px; font-size: 1rem; outline: none; background: rgba(255,255,255,0.9); box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; font-family: 'Poppins', sans-serif; }
 .barra-busqueda:focus { background: #fff; border-color: #FFC107; box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.4); }
 .boton-buscar { border: none; border-radius: 0 50px 50px 0; background-color: #F44336; padding: 0 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease; }
 .boton-buscar:hover { background-color: #d32f2f; }
-.lupa { width: 24px; height: 24px; } /* Ajustado para tu .png, aunque un SVG blanco sería ideal */
-
-
-/* Derecha: Iconos */
-.seccion-derecha { display: flex; align-items: center; gap: 35px; }
-
-/* Estilo común para los contenedores de iconos */
-.icono-favorito, .icono-cuenta, .icono-carrito {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.lupa { width: 24px; height: 24px; }
+.seccion-derecha { 
+    display: flex; 
+    align-items: center; 
+    gap: 35px; 
+    position: relative; /* MUY IMPORTANTE */
 }
-.icono-favorito:hover, .icono-cuenta:hover, .icono-carrito:hover {
-    transform: translateY(-3px);
-}
+.icono-favorito, .icono-cuenta, .icono-carrito { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: transform 0.2s ease; }
+.icono-favorito:hover, .icono-cuenta:hover, .icono-carrito:hover { transform: translateY(-3px); }
+.favorito-png, .cuenta-png, .carrito-png { width: 28px; height: 28px; filter: brightness(0) invert(1); }
+.contador { position: absolute; top: -5px; right: -8px; background: #FFC107; color: #333; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; display: flex; justify-content: center; align-items: center; font-weight: bold; border: 2px solid #fff; }
 
-/* Estilo para las imágenes de los iconos */
-.favorito-png, .cuenta-png, .carrito-png {
-    width: 28px;
-    height: 28px;
-    filter: brightness(0) invert(1); /* Truco CSS para hacer tus PNG blancos! */
-}
-.contador {
-    position: absolute;
-    top: -5px;
-    right: -8px; /* Ajusta según la posición exacta de tu icono */
-    background: #FFC107;
-    color: #333;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    border: 2px solid #fff;
-}
-/* NOTA: Los estilos de los .popup y sus formularios no se tocan para preservar su funcionalidad. */
-/* === ESTILOS PARA POPUPS (AÑADIR AL FINAL DEL CSS) === */
-/* === CÓDIGO COMPLETO Y CORREGIDO PARA LOS POPUPS === */
+/* --- SEPARADOR DE ONDA Y CATEGORÍAS --- */
+.wave-container { line-height: 0; margin-top: -1px; }
+.wave-container svg { fill: #2c5b36; }
+.categorias { background: linear-gradient(to bottom, #f4f7f6, #ffffff); padding: 0 20px 40px 20px; text-align: center; position: relative; overflow: hidden; }
+.name-categoria { margin-top: 20px; font-family: 'Poppins', sans-serif; font-size: 2.2rem; font-weight: 700; color: #34495E; margin-bottom: 40px; position: relative; display: inline-block; }
+.name-categoria::after { content: ''; position: absolute; width: 60%; height: 4px; background: linear-gradient(to right, #667eea, #764ba2); bottom: -10px; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+.categorias-contenedor { display: flex; justify-content: center; align-items: center; gap: 30px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+.electronica, .limpieza, .hogar { text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 180px; height: 170px; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 25px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); padding: 20px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.electronica:hover, .limpieza:hover, .hogar:hover { transform: translateY(-12px) scale(1.03); background: rgba(255, 255, 255, 0.9); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); border-color: rgba(255, 255, 255, 0.8); }
+.electronica-imagen, .limpieza-imagen, .hogar-imagen { width: 60px; height: 60px; object-fit: contain; margin-bottom: 15px; transition: transform 0.3s ease; }
+.electronica:hover .electronica-imagen, .limpieza:hover .limpieza-imagen, .hogar:hover .hogar-imagen { transform: scale(1.1); }
+.electronica-nombre, .limpieza-nombre, .hogar-nombre { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 600; text-align: center; }
 
-/* 1. El Contenedor de cada icono (el ancla) */
+/* --- MARQUESINA Y SLIDER --- */
+.marquesina { width: 100%; padding: 20px; overflow: hidden; background: linear-gradient(-45deg, #FDB813, #F58320, #E03C31, #f7931e); background-size: 400% 400%; animation: gradientShift 15s ease infinite; color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); position: relative; display: flex; align-items: center; justify-content: center; margin: 20px 0; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+.marquesina p { animation: none; padding-left: 0; transition: opacity 0.5s ease-in-out; }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.fila-promo { display: flex; gap: 10px; max-width: 1200px; margin: 20px auto; align-items: stretch; height: 300px; }
+.publicidad-contenedor { flex: 1.2; position: relative; overflow: hidden; border-radius: 18px; }
+.publicidad { display: flex; transition: transform 0.5s ease; width: 100%; height: 100%; }
+.publicidad > div { flex: 0 0 100%; height: 100%; }
+.img1-png, .img2-png, .img3-png, .img4-png, .img5-png, .img6-png { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 18px; }
+.btn-izquierdo, .btn-derecho { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; padding: .5rem; border-radius: 100px; cursor: pointer; z-index: 2; }
+.btn-izquierdo { left: 0.5rem; }
+.btn-derecho { right: 0.5rem; }
+.btn-izquierdo img, .btn-derecho img { width: 32px; height: 32px; display: block; }
+.columna-derecha { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.estatica { flex: 1; display: flex; overflow: hidden; position: relative; }
+.estatica img { width: 100%; height: 100%; object-fit: contain; border-radius: 16px; display: block; background: #32a306; transition: transform 0.3s ease; }
+.estatica img:hover { transform: scale(1.01); }
+
+/* ====================================================== */
+/* --- 1. ESTILOS POR DEFECTO (CÓMO SE VERÁ EN PC) --- */
+/* ====================================================== */
+
+/* Cada ícono es el ancla para su propio popup */
 .popup-container {
     position: relative;
 }
 
-/* 2. El Popup (la ventana flotante) */
+/* Regla general para todos los popups */
 .popup {
     display: none;
     position: absolute;
-    top: calc(100% + 15px);
-    right: 0;
-    width: 300px;
-    background: rgba(35, 43, 56, 0.85); /* Un fondo oscuro más elegante */
-    backdrop-filter: blur(20px) saturate(180%);
+    z-index: 1000;
+    width: 320px;
+    background: rgba(35, 43, 56, 0.9);
+    backdrop-filter: blur(15px) saturate(180%);
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 25px;
-    z-index: 1000;
     opacity: 0;
-    transform: translateY(10px);
+    top: calc(100% + 15px);
     transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px);
+    
+    /* Por defecto, en PC, los popups se alinean a la derecha de su ícono */
+    right: 0;
 }
 
-/* 3. El estado activo que tu JavaScript controla */
 .popup.active {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* === 4. ESTILOS DETALLADOS PARA EL CONTENIDO DEL POPUP (LO NUEVO) === */
 
-.popup h4 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #ffffff; /* Título en blanco */
-}
-
-.popup p {
-    font-family: 'Poppins', sans-serif;
-    color: #c5c8d3; /* Un gris claro para el texto normal */
-    text-align: center;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-}
-
-/* Contenedor de botones Iniciar/Registrar */
-.popup .usuario-opciones {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Estilo común para TODOS los botones dentro de los popups */
-.popup button, .popup .btn-admin {
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-    display: block; /* Para que el <a> se comporte como botón */
-    box-sizing: border-box; /* Para que el padding no afecte el width */
-}
-
-/* Estilo específico para botones principales (Iniciar, Registrar) */
-.popup .usuario-opciones button, .popup form button {
-    color: white;
-    background: linear-gradient(135deg, #667eea, #764ba2); /* Degradado púrpura/azul */
-    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
-}
-.popup .usuario-opciones button:hover, .popup form button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4);
-}
-
-/* Estilo para el botón de Admin */
-.popup .btn-admin {
-    margin-top: 12px;
-    color: #d1d5e0;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.popup .btn-admin:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-/* Estilo para los campos de formulario */
-.popup form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.popup form input, .popup form textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
-    box-sizing: border-box;
-}
-.popup form input:focus, .popup form textarea:focus {
-    outline: none;
-    border-color: #764ba2;
-    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.3);
-}
-
-.popup .volver {
-    color: #a7b0c9;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: color 0.3s ease;
-}
-.popup .volver:hover {
-    color: #ffffff;
-}
-
-/* === ESTILOS DETALLADOS PARA EL POPUP DEL CARRITO === */
-
-/* Contenedor de la lista de items */
-.carrito-items {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Espacio entre productos */
-    max-height: 250px; /* Altura máxima antes de mostrar scroll */
-    overflow-y: auto; /* Muestra scroll si hay muchos productos */
-    padding-right: 10px; /* Espacio para la barra de scroll */
-    margin: 15px 0;
-}
-
-/* Fila de un solo producto */
-.carrito-item {
-    display: flex; /* ¡La clave! Pone los elementos en fila */
-    align-items: center; /* Centra verticalmente */
-    gap: 15px; /* Espacio entre imagen, info y botón */
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.carrito-item:last-child {
-    border-bottom: none; /* El último item no lleva línea divisoria */
-}
-
-/* Imagen del producto */
-.carrito-item img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover; /* Asegura que la imagen no se deforme */
-    border-radius: 8px;
-    flex-shrink: 0; /* Evita que la imagen se encoja */
-}
-
-/* Contenedor de la información (nombre, cantidad, precio) */
-.carrito-item .info {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0; /* <-- AÑADE ESTA LÍNEA */
-}
-
-.carrito-item .nombre {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #ffffff;
-    /* --- LÍNEAS AÑADIDAS --- */
-    overflow-wrap: break-word;
-    word-break: break-word;
-    line-height: 1.3; /* Espaciado vertical si el texto ocupa 2 líneas */
-    text-align: left; /* Asegura que el texto se alinee a la izquierda */
-}
-
-.carrito-item .cantidad, .carrito-item .precio {
-    font-size: 0.8rem;
-    color: #a7b0c9;
-}
-
-/* Botón de eliminar */
-.carrito-item .eliminar {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ff5c5c;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.carrito-item .eliminar:hover {
-    background: #ff5c5c;
-    color: white;
-    transform: scale(1.1) rotate(90deg);
-}
-
-/* Estilos para la sección del total y botones */
-.total {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #ffffff;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.btn-checkout {
-    /* Reutilizamos los estilos de los botones del otro popup */
-    width: 100%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    color: white;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
-}
-.btn-checkout:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4);
-}
-
-.vaciar-carrito {
-    color: #ff5c5c;
-    text-align: center;
-    font-size: 0.85rem;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: color 0.3s ease;
-}
-.vaciar-carrito:hover {
-    color: #ff8c8c;
-}
-
-/* === ESTILOS RESPONSIVOS (Adaptados) === */
-@media (max-width: 1024px) {
-    .contenido-barra { padding: 0 25px; }
-    .seccion-centro { padding: 0 25px; }
-    .seccion-derecha { gap: 25px; }
-    .nombre-empresa { font-size: 1.5rem; }
-    .eslogan { display: none; }
-}
-
+/* ==================================================================== */
+/* --- 2. AJUSTES SOLO PARA MÓVIL (PANTALLAS DE 768px O MENOS) --- */
+/* ==================================================================== */
 @media (max-width: 768px) {
+
+    /* Anulamos la regla de PC para que no interfiera */
+    .popup {
+        right: auto;
+    }
+
+    /* Popup de FAVORITOS (izquierda) */
+    .icono-favorito .popup {
+        left: -60px;
+    }
+
+    /* Popup de USUARIO (centro) */
+    .icono-cuenta .popup {
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+    }
+    .icono-cuenta .popup.active {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* Popup de CARRITO (derecha) */
+    .icono-carrito .popup {
+        right: -50px;
+    }
+}
+.popup h4 { margin-top: 0; margin-bottom: 20px; text-align: center; font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600; color: #ffffff; }
+.popup p { font-family: 'Poppins', sans-serif; color: #c5c8d3; text-align: center; font-size: 0.9rem; margin-bottom: 20px; }
+.popup .usuario-opciones { display: flex; flex-direction: column; gap: 12px; }
+.popup button, .popup .btn-admin { width: 100%; padding: 12px; border-radius: 10px; border: none; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none; display: block; box-sizing: border-box; }
+.popup .usuario-opciones button, .popup form button { color: white; background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); }
+.popup .usuario-opciones button:hover, .popup form button:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4); }
+.popup .btn-admin { margin-top: 12px; color: #d1d5e0; background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+.popup .btn-admin:hover { background-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+.popup form { display: flex; flex-direction: column; gap: 15px; }
+.popup form input, .popup form textarea { width: 100%; padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); background-color: rgba(0, 0, 0, 0.2); color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 0.9rem; box-sizing: border-box; }
+.popup form input:focus, .popup form textarea:focus { outline: none; border-color: #764ba2; box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.3); }
+.popup .volver { color: #a7b0c9; cursor: pointer; font-size: 0.85rem; transition: color 0.3s ease; }
+.popup .volver:hover { color: #ffffff; }
+.carrito-items { display: flex; flex-direction: column; gap: 15px; max-height: 250px; overflow-y: auto; padding-right: 10px; margin: 15px 0; }
+.carrito-item { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.carrito-item:last-child { border-bottom: none; }
+.carrito-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.carrito-item .item-info { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.carrito-item .item-info .nombre { font-weight: 600; font-size: 0.9rem; color: #ffffff; overflow-wrap: break-word; word-break: break-word; line-height: 1.3; text-align: left; }
+.carrito-item .item-info .cantidad, .carrito-item .item-info .precio { font-size: 0.8rem; color: #a7b0c9; }
+.carrito-item .eliminar, .favorito-acciones .eliminar { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #ff5c5c; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: bold; transition: all 0.3s ease; flex-shrink: 0; }
+.carrito-item .eliminar:hover, .favorito-acciones .eliminar:hover { background: #ff5c5c; color: white; transform: scale(1.1) rotate(90deg); }
+.total { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; color: #ffffff; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+.btn-checkout { width: 100%; padding: 12px; border-radius: 10px; border: none; font-family: 'Poppins', sans-serif; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-align: center; color: white; background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); }
+.btn-checkout:hover { transform: translateY(-3px); box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4); }
+.vaciar-carrito { color: #ff5c5c; text-align: center; font-size: 0.85rem; cursor: pointer; margin-top: 10px; transition: color 0.3s ease; }
+.vaciar-carrito:hover { color: #ff8c8c; }
+.favorito-acciones { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; margin-left: auto; }
+.btn-accion-fav.pasar-carrito { background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3); color: white; border: none; border-radius: 8px; padding: 8px 15px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+.btn-accion-fav.pasar-carrito:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4); }
+
+
+/* --- FOOTER --- */
+.pie-pagina { background: linear-gradient(135deg, #2c3e50, #3498db); padding: 40px 20px; font-family: 'Poppins', Arial, sans-serif; color: white; margin-top: 40px; position: relative; overflow: hidden; }
+.pie-pagina::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%); pointer-events: none; }
+.pie-suscripcion { text-align: center; max-width: 800px; margin: 0 auto 40px; position: relative; z-index: 2; }
+.pie-suscripcion h2 { font-size: 2.2rem; color: #ffffff; margin-bottom: 15px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.pie-suscripcion h3 { font-size: 1.6rem; color: rgba(255,255,255,0.9); margin-bottom: 15px; font-weight: 500; }
+.compra-segura { font-size: 1.3rem; color: #f39c12; font-weight: bold; margin-bottom: 30px; background: rgba(243,156,18,0.1); padding: 10px 20px; border-radius: 25px; display: inline-block; }
+.boletin { margin: 30px 0; }
+.boletin p { margin-bottom: 20px; color: rgba(255,255,255,0.9); font-size: 1.1rem; }
+.formulario-suscripcion { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+.formulario-suscripcion input { padding: 15px 20px; border: none; border-radius: 25px; width: 350px; font-size: 1rem; font-family: 'Poppins', sans-serif; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+.formulario-suscripcion input:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,0.3); transform: translateY(-2px); }
+.formulario-suscripcion button { padding: 15px 30px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1rem; font-weight: 600; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; box-shadow: 0 6px 20px rgba(231,76,60,0.3); }
+.formulario-suscripcion button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(231,76,60,0.4); background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.privacidad { font-size: 0.95rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+.pie-enlaces { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 30px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); position: relative; z-index: 2; }
+.columna h4 { color: #ffffff; margin-bottom: 20px; font-size: 1.3rem; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.columna ul { list-style: none; padding: 0; }
+.columna li { margin-bottom: 12px; transition: transform 0.2s ease; }
+.columna li:hover { transform: translateX(5px); }
+.columna a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; position: relative; }
+.columna a::before { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background: #f39c12; transition: width 0.3s ease; }
+.columna a:hover { color: #f39c12; }
+.columna a:hover::before { width: 100%; }
+.pie-derechos { text-align: center; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); font-size: 0.95rem; position: relative; z-index: 2; }
+
+
+/* === REGLAS RESPONSIVAS PARA MÓVILES Y TABLETS === */
+@media (max-width: 768px) {
+    /* --- BARRA SUPERIOR MÓVIL --- */
+    .barra-superior-contenido { flex-direction: column; gap: 10px; padding: 0 20px; }
+    .info, .numero { text-align: center; font-size: 0.9em; justify-content: center; }
+
+    /* --- BARRA PRINCIPAL MÓVIL --- */
     .barra-principal { padding: 20px 0; }
     .contenido-barra { flex-direction: column; gap: 20px; }
     .seccion-izquierda, .seccion-derecha { width: 100%; justify-content: center; }
     .seccion-centro { width: 100%; max-width: 400px; padding: 0; order: 3; }
-    .seccion-derecha { order: 2; gap: 40px; /* Más espacio entre iconos en móvil */ }
-}
-/* Fin de la barra principal */
-/* === SECCIÓN DE CATEGORÍAS - ESTILO PROFESIONAL Y MODERNO (v2 Corregido) === */
-/* Contenedor principal de la sección */
-/* === ESTILOS PARA EL SEPARADOR DE ONDA (FINAL v2) === */
-.wave-container {
-    line-height: 0; 
-    margin-top: -1px; 
-}
-
-.wave-container svg {
-    fill: #2c5b36; 
-}
-
-/* === SECCIÓN DE CATEGORÍAS - ESTILO PROFESIONAL (v6 Ajuste Final Forzado) === */
-.categorias {
-    background: linear-gradient(to bottom, #f4f7f6, #ffffff);
-    /* AJUSTE CLAVE: Eliminamos TODO el padding superior */
-    padding-top: 0; 
-    padding-bottom: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Título "Categorías" */
-.name-categoria {
-    /* AJUSTE CLAVE: Usamos margen para crear el espacio */
-    margin-top: 10px; 
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #34495E;
-    margin-bottom: 40px;
-    position: relative;
-    display: inline-block;
-}
-
-/* [EL RESTO DEL CÓDIGO DE CATEGORÍAS PERMANECE IGUAL] */
-
-/* Detalle decorativo para el título */
-.name-categoria::after {
-    content: '';
-    position: absolute;
-    width: 60%;
-    height: 4px;
-    background: linear-gradient(to right, #667eea, #764ba2);
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-/* Contenedor de las tarjetas de categoría */
-.categorias-contenedor {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Estilo unificado para todas las tarjetas de categoría */
-.electronica, .limpieza, .hogar {
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 180px;
-    height: 170px;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.electronica:hover, .limpieza:hover, .hogar:hover {
-    transform: translateY(-12px) scale(1.03);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.8);
-}
-
-.electronica-imagen, .limpieza-imagen, .hogar-imagen {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-}
-
-.electronica:hover .electronica-imagen, 
-.limpieza:hover .limpieza-imagen, 
-.hogar:hover .hogar-imagen {
-    transform: scale(1.1);
-}
-
-.electronica-nombre, .limpieza-nombre, .hogar-nombre {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-}
-
-@media (max-width: 768px) {
-    .categorias {
-        padding-top: 0;
-        padding-bottom: 30px;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    .name-categoria {
-        font-size: 1.8rem;
-        margin-top: 20px;
-        margin-bottom: 30px;
-    }
-    .categorias-contenedor { gap: 20px; }
-    .electronica, .limpieza, .hogar {
-        width: 140px;
-        height: 130px;
-        padding: 15px;
-    }
-    .electronica-imagen, .limpieza-imagen, .hogar-imagen {
-        width: 45px;
-        height: 45px;
-        margin-bottom: 10px;
-    }
-    .electronica-nombre, .limpieza-nombre, .hogar-nombre {
-        font-size: 0.9rem;
-    }
-}
-
-/* === MARQUESINA === */
-
-.marquesina {
-    width: 100%;
-    padding: 20px; /* Un poco más de padding para que respire */
-    overflow: hidden;
-    /* Nuevo degradado cálido "Atardecer Dorado" */
-    background: linear-gradient(-45deg, #FDB813, #F58320, #E03C31, #f7931e);
-    background-size: 400% 400%;
-    /* Animación más lenta y suave */
-    animation: gradientShift 15s ease infinite; 
+    .seccion-derecha { order: 2; gap: 40px; }
+    .eslogan { display: none; }
     
-    color: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.5rem; /* Tamaño de fuente ligeramente ajustado */
-    font-weight: 700; /* Un poco más grueso para destacar */
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centramos el texto */
-    margin: 20px 0;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-    text-align: center; /* Asegura que el texto esté centrado */
-}
-
-/* El párrafo dentro de la marquesina */
-.marquesina p {
-    /* Eliminamos la animación de movimiento y el padding */
-    animation: none;
-    padding-left: 0;
-    /* Añadimos una transición para el efecto de fade */
-    transition: opacity 0.5s ease-in-out;
-}
-
-/* Keyframes para la animación del fondo (ya lo tenías, solo lo ajustamos) */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Estilos responsivos para la marquesina */
-@media (max-width: 768px) {
-    .marquesina {
-        font-size: 1.2rem;
-        padding: 15px;
-    }
-}
-
-/* Contenedor del carrusel */
-.publicidad-contenedor {
-  flex: 1.2;               /* el carrusel ocupa más espacio */
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px;
-  height: 100%;
-  width: 100%;
-}
-
-/* Fila principal que contiene carrusel + columna derecha */
-.fila-promo {
-  display: flex;
-  gap: 10px;             /* espacio entre carrusel y columna derecha */
-  max-width: 1200px;     /* opcional, para centrar mejor */
-  margin: 20px auto;
-  align-items: stretch;   /* ambas columnas tienen la misma altura */
-  height: 300px;          /* altura del carrusel y columna derecha */
-}
-
-/* Carrusel */
-.publicidad {
-  display: flex;
-  transition: transform 0.5s ease;
-  width: 100%;
-    height: 100%;
-}
-
-.publicidad > div {
-  flex: 0 0 100%; /* cada slide ocupa el 100% del contenedor */
-  height: 100%;
-}
-
-.img1-png,
-.img2-png,
-.img3-png,
-.img4-png,
-.img5-png,
-.img6-png {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* llena el contenedor sin deformar */
-  display: block;
-  border-radius: 18px;
-}
-
-/* Botones del carrusel */
-.btn-izquierdo,
-.btn-derecho {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-40%);
-  background: none;
-  border: none;
-  padding: .5rem;
-  border-radius: 100px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-.btn-izquierdo { left: 0.5rem; }
-.btn-derecho  { right: 0.5rem; }
-
-.btn-izquierdo img,
-.btn-derecho img {
-  width: 32px;
-  height: 32px;
-  display: block;
-}
-
-.btn-izquierdo:focus,
-.btn-derecho:focus {
-  outline: 2px solid white;  /* accesibilidad */
-  outline-offset: 2px;
-}
-
-.btn-izquierdo:hover,
-.btn-derecho:hover {
-  transform: translateY(-40%) scale(1.1); /* efecto hover */
-  transition: transform 0.2s ease;
-}
-
-/* Columna derecha (banners estáticos) */
-.columna-derecha {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;  /* igual que el carrusel */
-  flex: 1;
-}
-
-.estatica {
-  flex: 1;           /* cada banner ocupa mitad de la columna */
-  display: flex;
-  overflow: hidden;  /* evita recortes bruscos */
-  position: relative;
-}
-
-.estatica img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;    /* se ve completa sin recortar demasiado */
-  border-radius: 16px;    /* igual que el carrusel */
-  display: block;
-  background: #32a306;
-  transition: transform 0.3s ease; /* opcional: efecto suave hover */
-}
-
-/* Efecto hover opcional para los banners */
-.estatica img:hover {
-  transform: scale(1.01);
-}
-/* Fin del carrusel */
-/* Pie de página general */
-
-            /* Footer Mejorado */
-        .pie-pagina {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            padding: 40px 20px;
-            font-family: 'Poppins', Arial, sans-serif;
-            color: white;
-            margin-top: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pie-pagina::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .pie-suscripcion {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .pie-suscripcion h2 {
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .pie-suscripcion h3 {
-            font-size: 1.6rem;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .compra-segura {
-            font-size: 1.3rem;
-            color: #f39c12;
-            font-weight: bold;
-            margin-bottom: 30px;
-            background: rgba(243,156,18,0.1);
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-block;
-        }
-
-        .boletin {
-            margin: 30px 0;
-        }
-
-        .boletin p {
-            margin-bottom: 20px;
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1rem;
-        }
-
-        .formulario-suscripcion {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .formulario-suscripcion input {
-            padding: 15px 20px;
-            border: none;
-            border-radius: 25px;
-            width: 350px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .formulario-suscripcion input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        .formulario-suscripcion button {
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(231,76,60,0.3);
-        }
-
-        .formulario-suscripcion button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(231,76,60,0.4);
-            background: linear-gradient(135deg, #c0392b, #e74c3c);
-        }
-
-        .privacidad {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.8);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .pie-enlaces {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto 30px;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        .columna h4 {
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .columna ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .columna li {
-            margin-bottom: 12px;
-            transition: transform 0.2s ease;
-        }
-
-        .columna li:hover {
-            transform: translateX(5px);
-        }
-
-        .columna a {
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .columna a::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: #f39c12;
-            transition: width 0.3s ease;
-        }
-
-        .columna a:hover {
-            color: #f39c12;
-        }
-
-        .columna a:hover::before {
-            width: 100%;
-        }
-
-        .pie-derechos {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 2px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.8);
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* === ESTILOS ADICIONALES PARA POPUP DE FAVORITOS (VERSIÓN CORREGIDA) === */
-
-/* Contenedor para los botones "Agregar" y "Eliminar" */
-.favorito-acciones {
-    display: flex;
-    flex-direction: column; /* Apila los botones verticalmente */
-    align-items: center;
-    justify-content: center; /* Centra el contenido verticalmente */
-    gap: 8px;
-    flex-shrink: 0; /* Evita que este contenedor se encoja */
-    margin-left: auto; /* Empuja los botones a la derecha */
-}
-
-/* Estilo para el botón "Agregar" con el degradado morado */
-.btn-accion-fav.pasar-carrito {
-    background: linear-gradient(135deg, #667eea, #764ba2); /* Degradado púrpura/azul */
-    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 15px; /* Tamaño balanceado */
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-accion-fav.pasar-carrito:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
-}
-
-/* Ajustamos el botón eliminar para que tenga el mismo tamaño y estilo que en el carrito */
-.favorito-acciones .eliminar {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ff5c5c;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-}
-
-.favorito-acciones .eliminar:hover {
-    background: #ff5c5c;
-    color: white;
-    transform: scale(1.1) rotate(90deg);
-}
-
-/* Corrección para el texto vertical (esta regla ya la tienes de cuando arreglamos el carrito, pero nos aseguramos que esté) */
-.carrito-item .info {
-    min-width: 0;
-}
-.carrito-item .nombre {
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
-
-/* === AJUSTE PARA CENTRAR POPUPS EN MÓVILES (VERSIÓN FORZADA) === */
-@media (max-width: 480px) {
-
-    .popup.active {
-        position: fixed !important; /* FORZAMOS la posición fija */
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important; /* FORZAMOS el centrado */
-        
-        width: 90vw !important; /* FORZAMOS el ancho */
-        max-width: 400px !important;
-
-        /* Anulamos la regla 'right' de escritorio */
-        right: auto !important;
-    }
-
+    /* --- CATEGORÍAS MÓVIL --- */
+    .categorias { padding: 0 15px 30px 15px; }
+    .name-categoria { font-size: 1.8rem; margin-top: 20px; margin-bottom: 30px; }
+    .categorias-contenedor { gap: 20px; }
+    .electronica, .limpieza, .hogar { width: 140px; height: 130px; padding: 15px; }
+    .electronica-imagen, .limpieza-imagen, .hogar-imagen { width: 45px; height: 45px; margin-bottom: 10px; }
+    .electronica-nombre, .limpieza-nombre, .hogar-nombre { font-size: 0.9rem; }
+    
+    /* --- MARQUESINA MÓVIL --- */
+    .marquesina { font-size: 1.2rem; padding: 15px; }
+    
+    /* --- POPUPS CENTRADOS EN MÓVIL --- */
+    
 }
